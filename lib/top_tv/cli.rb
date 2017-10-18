@@ -10,21 +10,17 @@ class TopTv::CLI
     puts "Welcome to Top TV Shows!"
     puts ""
     #scrape categories, then list
-    puts <<~HEREDOC
-      1. New TV Tonight
-      2. Most Popular TV
-      3. Top TV Comedies
-      4. Top TV Dramas
-      5. Top Sci-fi/Horror/Fantasy
-    HEREDOC
-
+    @headings = TopTv::Heading.headings
+    @headings.each.with_index(1) do |heading, i|
+      puts "#{i}. #{heading.name}"
+    end
     puts ""
     puts "Please enter the corresponding number or enter exit to quit:"
+    puts ""
     input = gets.strip.downcase
 
     #list_shows(input)
     if input != "exit"
-      puts "list of shows..."
       puts ""
       puts "What show would you like more info on?"
       input = gets.strip.to_i
