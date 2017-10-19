@@ -1,12 +1,11 @@
 class TopTv::Heading
-  attr_accessor :name
-  attr_reader :shows
+  attr_accessor :name, :shows
 
   @@all = []
 
-  def initialize(name)
+  def initialize(name, shows)
     @name = name
-    @shows = []
+    @shows = shows
     @@all << self
   end
 
@@ -15,3 +14,9 @@ class TopTv::Heading
   end
 
 end
+
+new_tonight = TopTv::Heading.new("New TV Tonight", "shows")
+most_pop = TopTv::Heading.new("Most Popular TV", "shows")
+top_com = TopTv::Heading.new("Top TV Comedies", "shows")
+top_dram = TopTv::Heading.new("Top TV Dramas", "shows")
+top_sci = TopTv::Heading.new("Top Sci-fi/Horror/Fantasy", "shows")
