@@ -23,16 +23,20 @@ class TopTv::CLI
     input = gets.strip.downcase
 
     if input != "exit"
+      puts ""
       heading = @headings[input.to_i-1]
       #scrape shows, then list
-      puts "#{heading.shows}"
+      the_shows = heading.shows.split(", ")
+      the_shows.each.with_index(1) do |show, i|
+        puts "#{i}. #{show}"
+      end
       #binding.pry
+      puts ""
       puts "What show would you like more info on?"
-      shows = heading.shows.split(",")
+
       input = gets.strip.to_i
 
-      #list_show(input)
-      shows[input]
+      show = the_shows[input]
       puts "Is there another show that you'd like to learn more about? (y/n)"
       input = gets.strip.downcase
       if input == "y"
