@@ -27,16 +27,16 @@ class TopTv::CLI
       puts ""
       heading = @headings[input.to_i-1]
       #scrape shows, then list. separate method?
-      the_shows = heading.shows.split(/(?<=\d)(?=[A-Za-z])/)
+      the_shows = heading.shows.gsub(" View All ", "").split(/(?<=\d)(?=[A-Za-z])/)
       the_shows.each.with_index(1) do |show, i|
         puts "#{i}. #{show}"
       end
-      #binding.pry
       puts ""
       puts "What show would you like more info on?"
       input = gets.strip.to_i
 
-      show = the_shows[input]
+      show = the_shows[input.to_i-1]
+      binding.pry
       puts "Is there another show that you'd like to learn more about? (y/n)"
       input = gets.strip.downcase
       if input == "y"
