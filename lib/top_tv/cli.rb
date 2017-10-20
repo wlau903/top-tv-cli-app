@@ -11,6 +11,7 @@ class TopTv::CLI
     puts "Welcome to Top TV Shows!"
     puts ""
     #scrape categories, then list
+    TopTv::Scraper.make_headings
     @headings = TopTv::Heading.all
     @headings.each.with_index(1) do |heading, i|
       puts "#{i}. #{heading.name}"
@@ -25,15 +26,14 @@ class TopTv::CLI
     if input != "exit"
       puts ""
       heading = @headings[input.to_i-1]
-      #scrape shows, then list
-      the_shows = heading.shows.split(", ")
+      #scrape shows, then list. separate method?
+      the_shows = heading.shows.split(/(?<=\d)(?=[A-Za-z])/)
       the_shows.each.with_index(1) do |show, i|
         puts "#{i}. #{show}"
       end
       #binding.pry
       puts ""
       puts "What show would you like more info on?"
-
       input = gets.strip.to_i
 
       show = the_shows[input]
@@ -44,7 +44,6 @@ class TopTv::CLI
         list_shows
       end
     end
-
   end
 
   def goodbye
