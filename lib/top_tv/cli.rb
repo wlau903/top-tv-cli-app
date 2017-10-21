@@ -27,7 +27,7 @@ class TopTv::CLI
       puts ""
       heading = @headings[input.to_i-1]
       #scrape shows, then list. separate method?
-      the_shows = heading.shows.gsub(" View All ", "").split(/(?<=\d)(?=[A-Za-z])/)
+      the_shows = heading.shows
       the_shows.each.with_index(1) do |show, i|
         puts "#{i}. #{show}"
       end
@@ -36,6 +36,7 @@ class TopTv::CLI
       input = gets.strip.to_i
 
       show = the_shows[input.to_i-1]
+      TopTv::Show.list_show_info(show)
       binding.pry
       puts "Is there another show that you'd like to learn more about? (y/n)"
       input = gets.strip.downcase
