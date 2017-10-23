@@ -52,7 +52,10 @@ class TopTv::CLI
   def list_show_info(show)
     puts "#{show.name}"
     puts "#{show.description}"
-    binding.pry
+    puts "#{show.genre}"
+    puts "#{show.network}"
+    puts "#{show.premiere_date}"
+    #binding.pry
   end
 
   def goodbye
