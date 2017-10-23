@@ -38,8 +38,7 @@ class TopTv::CLI
 
       chosen_show = the_shows[input.to_i-1]
       show = TopTv::Show.find_show_by_name(chosen_show)
-      #list_show_info(show)
-      #binding.pry
+      list_show_info(show)
 
       puts "Is there another show that you'd like to learn more about? (y/n)"
       input = gets.strip.downcase
@@ -48,6 +47,12 @@ class TopTv::CLI
         list_shows
       end
     end
+  end
+
+  def list_show_info(show)
+    puts "#{show.name}"
+    puts "#{show.description}"
+    binding.pry
   end
 
   def goodbye
