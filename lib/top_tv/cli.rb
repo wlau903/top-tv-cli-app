@@ -31,13 +31,16 @@ class TopTv::CLI
       the_shows.each.with_index(1) do |show, i|
         puts "#{i}. #{show}"
       end
+      TopTv::Scraper.make_shows
       puts ""
       puts "What show would you like more info on?"
       input = gets.strip.to_i
 
-      show = the_shows[input.to_i-1]
-      TopTv::Show.list_show_info(show)
-      binding.pry
+      chosen_show = the_shows[input.to_i-1]
+      show = TopTv::Show.find_show_by_name(chosen_show)
+      #list_show_info(show)
+      #binding.pry
+
       puts "Is there another show that you'd like to learn more about? (y/n)"
       input = gets.strip.downcase
       if input == "y"

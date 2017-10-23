@@ -13,7 +13,9 @@ class TopTv::Scraper
   end
 
   def self.make_shows
-    self.scrape_headings.each do |show|
+    headings = self.scrape_headings
+    shows = headings.css("tr td.middle_col a") #all shows
+    shows.each do |show|
       TopTv::Show.new_from_home_page(show)
     end
   end
