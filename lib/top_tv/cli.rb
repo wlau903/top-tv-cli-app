@@ -8,9 +8,8 @@ class TopTv::CLI
 
   def main_menu
     puts ""
-    puts "Welcome to Top TV Shows!"
+    puts "~~~ Welcome to Top TV Shows! ~~~"
     puts ""
-    #scrape categories, then list
     TopTv::Scraper.make_headings
     @headings = TopTv::Heading.all
     @headings.each.with_index(1) do |heading, i|
@@ -26,7 +25,8 @@ class TopTv::CLI
     if input != "exit"
       puts ""
       heading = @headings[input.to_i-1]
-      #scrape shows, then list. separate method?
+      puts "~~~ #{heading.name} ~~~"
+      puts ""
       the_shows = heading.shows
       the_shows.each.with_index(1) do |show, i|
         puts "#{i}. #{show}"
@@ -42,7 +42,9 @@ class TopTv::CLI
 
       puts "Is there another show that you'd like to learn more about? (y/n)"
       input = gets.strip.downcase
+
       if input == "y"
+        @headings.clear
         main_menu
         list_shows
       end
@@ -50,15 +52,19 @@ class TopTv::CLI
   end
 
   def list_show_info(show)
-    puts "#{show.name}"
+    puts ""
+    puts "~~~ #{show.name} ~~~"
+    puts ""
     puts "#{show.description}"
-    puts "#{show.genre}"
-    puts "#{show.network}"
-    puts "#{show.premiere_date}"
-    #binding.pry
+    puts ""
+    puts "Genre: #{show.genre}"
+    puts "Network: #{show.network}"
+    puts "Premiere Date: #{show.premiere_date}"
+    puts ""
   end
 
   def goodbye
+    puts ""
     puts "Goodbye!"
   end
 
