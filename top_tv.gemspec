@@ -4,14 +4,14 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'top_tv/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "top_tv"
+  spec.name          = "top-tv"
   spec.version       = TopTv::VERSION
-  spec.authors       = ["'Wendy Lau'"]
-  spec.email         = ["'wlau903@gmail.com'"]
+  spec.authors       = ["Wendy Lau"]
+  spec.email         = ["wlau903@gmail.com"]
 
-  spec.summary       = %q{Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{Top television shows}
+  spec.description   = %q{Lists the top television shows as rated on the Rotten Tomatoes website.}
+  spec.homepage      = ""
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -23,16 +23,12 @@ Gem::Specification.new do |spec|
       "public gem pushes."
   end
 
-  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
-    f.match(%r{^(test|spec|features)/})
-  end
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
+  spec.files         = `git ls-files`.split($\)
+  spec.executables   = ["top-tv"]
+  spec.require_paths = ["lib", "lib/top_tv"]
 
   spec.add_development_dependency "bundler", "~> 1.14"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "pry"
-
   spec.add_dependency "nokogiri"
 end
