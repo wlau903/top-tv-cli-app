@@ -4,11 +4,11 @@ This gem provides a CLI for the top television shows as rated on the Rotten Toma
 
 ## Installation
 
-Run:    $ gem install top-tv
+Run: `gem install top-tv`.
 
 ## Usage
 
-Run:    $ top-tv
+Run: `top-tv`.
 
 ## Development
 
