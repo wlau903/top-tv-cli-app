@@ -1,6 +1,7 @@
 class TopTv::CLI
 
   def call
+    TopTv::Scraper.make_headings
     main_menu
     list_shows
     goodbye
@@ -10,7 +11,6 @@ class TopTv::CLI
     puts ""
     puts "~~~ Welcome to Top TV Shows! ~~~"
     puts ""
-    TopTv::Scraper.make_headings
     @headings = TopTv::Heading.all
     @headings.each.with_index(1) do |heading, i|
       puts "#{i}. #{heading.name}"
@@ -22,7 +22,7 @@ class TopTv::CLI
     puts "Please enter the corresponding number or enter exit to quit:"
     input = gets.strip.downcase
 
-    if input != "exit"
+    if input != "exit" && input <= "5"
       puts ""
       heading = @headings[input.to_i-1]
       puts "~~~ #{heading.name} ~~~"
@@ -44,10 +44,12 @@ class TopTv::CLI
       input = gets.strip.downcase
 
       if input == "y"
-        @headings.clear
         main_menu
         list_shows
       end
+    else
+      puts "Invalid choice, please try again"
+      list_shows
     end
   end
 

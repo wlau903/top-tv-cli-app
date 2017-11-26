@@ -3,13 +3,6 @@ class TopTv::Show
 
   @@all = []
 
-  def self.new_from_home_page(show)
-    self.new(
-      show.text.gsub(" View All ", "").gsub(",", ""),
-      "https://www.rottentomatoes.com#{show.attr("href")}"
-    )
-  end
-
   def initialize(name, url)
     @name = name
     @url = url

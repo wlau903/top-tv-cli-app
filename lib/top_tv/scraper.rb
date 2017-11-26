@@ -8,7 +8,9 @@ class TopTv::Scraper
 
   def self.make_headings
     self.scrape_headings.each do |heading|
-      TopTv::Heading.new_from_home_page(heading)
+      name = heading.css("h2").text.gsub(" on RT", "")
+      shows = heading.css("tr td.middle_col a").collect {|show| show.text.gsub(" View All ", "").gsub(",", "")}.join(",").split(",")
+      TopTv::Heading.new(name, shows)
     end
   end
 
@@ -16,7 +18,9 @@ class TopTv::Scraper
     headings = self.scrape_headings
     shows = headings.css("tr td.middle_col a") #all shows
     shows.each do |show|
-      TopTv::Show.new_from_home_page(show)
+      name = show.text.gsub(" View All ", "").gsub(",", "")
+      url = "https://www.rottentomatoes.com#{show.attr("href")}"
+      TopTv::Show.new(name, url)
     end
   end
 
